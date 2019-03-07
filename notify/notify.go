@@ -45,7 +45,7 @@ type Notify interface {
 	SendErrorNotification(notification ErrorNotification) error
 }
 
-//Add notification clients given by user in config file to notificationsList
+// AddNew adds notification clients given by user in config file to notificationsList
 func AddNew(notificationTypes NotificationTypes) {
 
 	v := reflect.ValueOf(notificationTypes)
@@ -77,7 +77,7 @@ func AddNew(notificationTypes NotificationTypes) {
 	}
 }
 
-//Send response time notification to all clients registered
+// SendResponseTimeNotification: Send response time notification to all clients registered
 func SendResponseTimeNotification(responseTimeNotification ResponseTimeNotification) {
 
 	for _, value := range notificationsList {
@@ -90,7 +90,7 @@ func SendResponseTimeNotification(responseTimeNotification ResponseTimeNotificat
 	}
 }
 
-//Send Error notification to all clients registered
+// SendErrorNotification: Send Error notification to all clients registered
 func SendErrorNotification(errorNotification ErrorNotification) {
 
 	for _, value := range notificationsList {
@@ -103,7 +103,7 @@ func SendErrorNotification(errorNotification ErrorNotification) {
 	}
 }
 
-//Send Test notification to all registered clients .To make sure everything is working
+// SendTestNotification: Send Test notification to all registered clients .To make sure everything is working
 func SendTestNotification() {
 
 	println("Sending Test notifications to the registered clients")

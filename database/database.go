@@ -57,7 +57,7 @@ type DatabaseTypes struct {
 	InfluxDb InfluxDb `json:"influxDb"`
 }
 
-//Intialize responseMean app and counts
+// Initialize: Intialize responseMean app and counts
 func Initialize(ids map[int]int64, mMeanResponseCount int, mErrorCount int) {
 
 	if mMeanResponseCount != 0 {
@@ -77,7 +77,7 @@ func Initialize(ids map[int]int64, mMeanResponseCount int, mErrorCount int) {
 
 }
 
-//Add database to the database List
+// AddNew adds database to the database List
 func AddNew(databaseTypes DatabaseTypes) {
 
 	v := reflect.ValueOf(databaseTypes)
@@ -140,7 +140,7 @@ func addTestErrorAndRequestInfo() {
 	}
 }
 
-//This function is called by requests package when request has been successfully performed
+// AddRequestInfo is called by requests package when request has been successfully performed
 //Request data is inserted to all the registered databases
 func AddRequestInfo(requestInfo RequestInfo) {
 	logRequestInfo(requestInfo)
@@ -170,7 +170,7 @@ func AddRequestInfo(requestInfo RequestInfo) {
 
 }
 
-//This function is called by requests package when a reuquest fails
+// AddErrorInfo is called by requests package when a reuquest fails
 //Error Information is inserted to all the registered databases
 func AddErrorInfo(errorInfo ErrorInfo) {
 	logErrorInfo(errorInfo)

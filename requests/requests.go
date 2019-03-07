@@ -43,12 +43,12 @@ type RequestConfig struct {
 	CheckEvery   time.Duration     `json:"checkEvery"`
 }
 
-//Set Id for request
+// SetId: Set Id for request
 func (requestConfig *RequestConfig) SetId(id int) {
 	requestConfig.Id = id
 }
 
-//check whether all requestConfig fields are valid
+// Validate checks whether all requestConfig fields are valid
 func (requestConfig *RequestConfig) Validate() error {
 
 	if len(requestConfig.Url) == 0 {
@@ -79,7 +79,7 @@ func (requestConfig *RequestConfig) Validate() error {
 	return nil
 }
 
-//Initialize data from config file and check all requests
+// RequestsInit: Initialize data from config file and check all requests
 func RequestsInit(data []RequestConfig, concurrency int) {
 	RequestsList = data
 
@@ -121,7 +121,7 @@ func RequestsInit(data []RequestConfig, concurrency int) {
 	println("All requests Successfull")
 }
 
-//Start monitoring by calling createTicker method for each request
+// StartMonitoring starts monitoring by calling createTicker method for each request
 func StartMonitoring() {
 	fmt.Println("\nStarted Monitoring all ", len(RequestsList), " apis .....")
 
@@ -163,7 +163,7 @@ func listenToRequestChannel() {
 
 }
 
-//takes the date from requestConfig and creates http request and executes it
+// PerformRequest takes the date from requestConfig and creates http request and executes it
 func PerformRequest(requestConfig RequestConfig, throttle chan int) error {
 	//Remove value from throttel channel when request is completed
 	defer func() {
@@ -326,14 +326,14 @@ func convertResponseToString(resp *http.Response) string {
 	return buf.String()
 }
 
-//Add header values from map to request
+// AddHeaders adds header values from map to request
 func AddHeaders(req *http.Request, headers map[string]string) {
 	for key, value := range headers {
 		req.Header.Add(key, value)
 	}
 }
 
-//convert params in map to url.Values
+// GetUrlValues: convert params in map to url.Values
 func GetUrlValues(params map[string]string) url.Values {
 	urlParams := url.Values{}
 	i := 0
@@ -348,7 +348,7 @@ func GetUrlValues(params map[string]string) url.Values {
 	return urlParams
 }
 
-//Creates body for request of type application/json from map
+// GetJsonParamsBody: Creates body for request of type application/json from map
 func GetJsonParamsBody(params map[string]string) (io.Reader, error) {
 	data, jsonErr := json.Marshal(params)
 

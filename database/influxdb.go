@@ -27,12 +27,12 @@ const (
 	DatabaseName = "InfluxDB"
 )
 
-//Return database name
+// GetDatabaseName returns database name
 func (influxDb InfluxDb) GetDatabaseName() string {
 	return DatabaseName
 }
 
-//Intiliaze influx db
+// Initialize: Intiliaze influx db
 func (influxDb InfluxDb) Initialize() error {
 	println("InfluxDB : Trying to Connect to database ")
 
@@ -77,7 +77,7 @@ func (influxDb InfluxDb) Initialize() error {
 	return nil
 }
 
-//Add request information to database
+// AddRequestInfo adds request information to database
 func (influxDb InfluxDb) AddRequestInfo(requestInfo RequestInfo) error {
 
 	tags := map[string]string{
@@ -120,7 +120,7 @@ func (influxDb InfluxDb) AddRequestInfo(requestInfo RequestInfo) error {
 	return nil
 }
 
-//Add Error information to database
+// AddErrorInfo adds Error information to database
 func (influxDb InfluxDb) AddErrorInfo(errorInfo ErrorInfo) error {
 
 	tags := map[string]string{
@@ -164,7 +164,7 @@ func (influxDb InfluxDb) AddErrorInfo(errorInfo ErrorInfo) error {
 	return nil
 }
 
-//Returns mean response time of url in given time .Currentlt not used
+// GetMeanResponseTime returns mean response time of url in given time .Currentlt not used
 func (influxDb InfluxDb) GetMeanResponseTime(Url string, span int) (float64, error) {
 
 	q := fmt.Sprintf(`select mean(responseTime) from "%s" WHERE time > now() - %dm GROUP BY time(%dm)`, Url, span, span)
